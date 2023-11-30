@@ -4,7 +4,7 @@ import allRouter from "./router/main.js";
 import dbInit from "./db/init.js";
 const app = express();
 const PORT = 3300;
-
+//comemnts
 connectDb();
 dbInit()
   .then(() => {
