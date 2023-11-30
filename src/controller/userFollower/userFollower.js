@@ -1,12 +1,12 @@
-import responseFollowerModel from "../../model/responseFollower/responseFollower.js";
+import userFollowerModel from "../../model/userFollower/userFollower.js";
 
-const responseFollowerController = {
+const userFollowerController = {
   create: async (req, res) => {
     try {
-      const { responseId, followerId } = req.body;
+      const { userId, followerId } = req.body;
 
-      await responseFollowerModel.create({
-        responseId,
+      await userFollowerModel.create({
+        userId,
         followerId,
       });
 
@@ -24,7 +24,7 @@ const responseFollowerController = {
 
   getAll: async (req, res) => {
     try {
-      const response = await responseFollowerModel.findAll(req);
+      const response = await userFollowerModel.findAll(req);
 
       res.status(200).json({
         message: ` successfully ${response} All  `,
@@ -39,7 +39,7 @@ const responseFollowerController = {
   getSingle: async () => {
     try {
       const { id } = req.params;
-      const response = await responseFollowerModel.findOne({
+      const response = await userFollowerModel.findOne({
         where: {
           id,
         },
@@ -60,18 +60,18 @@ const responseFollowerController = {
 
   //   -------------------Update----------------------------
 
-  responseUpdate: async (req, res) => {
+  Update: async (req, res) => {
     try {
       const { id } = req.params;
       // const updateData = req.body;
-      //   const response = await responseFollowerModel.update(updateData, {
+      //   const response = await userFollowerModel.update(updateData, {
       //     where: {
       //       id,
       //     },
       //   });
 
-      const { firstName, lastName, email, password } = req.body;
-      const response = await responseFollowerModel.findOne({
+      const { userId, followerId } = req.body;
+      const response = await userFollowerModel.findOne({
         where: {
           id,
         },
@@ -83,10 +83,8 @@ const responseFollowerController = {
         });
       }
 
-      response.firstName = firstName;
-      response.lastName = lastName;
-      response.email = email;
-      response.password = password;
+      response.userId = userId;
+      response.followerId = followerId;
       await response.save();
 
       return res.status(200).json({
@@ -103,16 +101,16 @@ const responseFollowerController = {
 
   //   --------------------Delete---------------------------
 
-  deleteresponse: async (req, res) => {
+  delete: async (req, res) => {
     try {
       const { id } = req.params;
-      //   let response = await responseFollowerModel.destroy({
+      //   let response = await userFollowerModel.destroy({
       //     where: {
       //       id,
       //     },
       //   });
 
-      const response = await responseFollowerModel.findOne({
+      const response = await userFollowerModel.findOne({
         where: {
           id,
         },
@@ -138,4 +136,4 @@ const responseFollowerController = {
   //   -----------------------------------------------
 };
 
-export default responseFollowerController;
+export default userFollowerController;
